@@ -1,7 +1,10 @@
 import java.sql.*;
 public interface DBConnection {
-    public static Connection connectDB(String url, String username, String password) {
+    public static Connection connectDB() {
         try {
+            String url = "jdbc:mysql://localhost:3306/bank_management";
+            String username = "root";
+            String password = "";
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection connection = DriverManager.getConnection(url, username, password);
             return connection;

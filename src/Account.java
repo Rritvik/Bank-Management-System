@@ -1,14 +1,27 @@
 import java.util.Scanner;
-
-public class Account {
+import java.sql.*;
+public class Account implements DBConnection {
+    /** DB Connection Start */
+    Connection connection = DBConnection.connectDB();
+    /** DB Connection End */
     double bal;
     double prevTrans;
     int prevTransType;
     String customerName;
-    String customer_acc;
-    Account(String name, String account_number) {
+    double customer_acc;
+    double customer_phone;
+    String customer_address;
+    Scanner sc = new Scanner(System.in);
+    Account(String name, double account_number) {
         this.customerName = name;
         this.customer_acc = account_number;
+    }
+
+    Account(String first_name, String last_name, double phone, String address, double account) {
+        this.customerName = first_name + " " + last_name;
+        this.customer_acc = account;
+        this.customer_phone = phone;
+        this.customer_address = address;
     }
 
     void menuOptions() {
@@ -21,7 +34,6 @@ public class Account {
 
     void menu() {
         int option;
-        Scanner sc = new Scanner(System.in);
         System.out.println("*********************************************");
         System.out.println("Welcome "+customerName);
         System.out.println("Your account number: "+customer_acc);
