@@ -3,9 +3,9 @@ import java.sql.SQLException;
 import java.util.*;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
-public class BankManagement extends Account {
-    BankManagement(String name, double account_number) {
-        super(name, account_number);
+public class BankManagement {
+    BankManagement(String name, long accountNumber) {
+        // super(name, accountNumber);
     }
 
     public static void main(String[] args) throws SQLException {
@@ -20,14 +20,14 @@ public class BankManagement extends Account {
         System.out.println("2. Register");
         int option = sc.nextInt();
         String name;
-        double account_number;
+        long accountNumber;
         switch(option) {
             case 1: 
                 System.out.println("Enter your Name: ");
                 name = sc.next();
                 System.out.println("Enter account number: ");
-                account_number = sc.nextDouble();
-                Account ac1 = new Account(name, account_number);
+                accountNumber = sc.nextLong();
+                Account ac1 = new Account(name, accountNumber);
                 ac1.menu();
                 break;
 
@@ -38,16 +38,16 @@ public class BankManagement extends Account {
                 System.out.println("Enter Last Name: ");
                 String lastName = sc.next();
                 System.out.println("Enter phone number: ");
-                double phone = sc.nextDouble();
+                long phone = sc.nextLong();
                 System.out.println("Enter address: ");
                 sc.nextLine();
                 address = sc.nextLine();
                 Random random = new Random();
-                double account = random.nextInt(9999999);
+                long account = random.nextLong(9999999);
                 String created_at = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date().getTime());
                 Statement statement = connection.createStatement();
-                statement.executeUpdate("insert into customer (firstname, lastname, account_number, phone, address, created_at) VALUES ('"+firstName+"', '"+lastName+"', '"+(int)account+"', '"+phone+"', '"+address+"', '"+created_at+"');");
-                Account ac2 = new Account(firstName, lastName, phone, address, (int)account);
+                statement.executeUpdate("insert into customer (firstname, lastname, account_number, phone, address, created_at) VALUES ('"+firstName+"', '"+lastName+"', '"+account+"', '"+phone+"', '"+address+"', '"+created_at+"');");
+                Account ac2 = new Account(firstName, lastName, phone, address, account);
                 ac2.menu();
         }
         

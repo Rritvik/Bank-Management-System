@@ -1,5 +1,5 @@
 import java.sql.*;
-public interface DBConnection {
+public class DBConnection {
     public static Connection connectDB() {
         try {
             String url = "jdbc:mysql://localhost:3306/bank_management";

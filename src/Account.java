@@ -1,27 +1,27 @@
 import java.util.Scanner;
 import java.sql.*;
-public class Account implements DBConnection {
+public class Account {
     /** DB Connection Start */
     Connection connection = DBConnection.connectDB();
     /** DB Connection End */
     double bal;
-    double prevTrans;
+    long prevTrans;
     int prevTransType;
     String customerName;
-    double customer_acc;
-    double customer_phone;
-    String customer_address;
+    long customerAcc;
+    long customerPhone;
+    String customerAddress;
     Scanner sc = new Scanner(System.in);
-    Account(String name, double account_number) {
+    Account(String name, long accountNumber) {
         this.customerName = name;
-        this.customer_acc = account_number;
+        this.customerAcc = accountNumber;
     }
 
-    Account(String first_name, String last_name, double phone, String address, double account) {
-        this.customerName = first_name + " " + last_name;
-        this.customer_acc = account;
-        this.customer_phone = phone;
-        this.customer_address = address;
+    Account(String firstName, String lastName, long phone, String address, long account) {
+        this.customerName = firstName + " " + lastName;
+        this.customerAcc = account;
+        this.customerPhone = phone;
+        this.customerAddress = address;
     }
 
     void menuOptions() {
@@ -36,7 +36,7 @@ public class Account implements DBConnection {
         int option;
         System.out.println("*********************************************");
         System.out.println("Welcome "+customerName);
-        System.out.println("Your account number: "+customer_acc);
+        System.out.println("Your account number: "+customerAcc);
         System.out.println("");
         menuOptions();
 
@@ -57,7 +57,7 @@ public class Account implements DBConnection {
                     System.out.println(".............");
                     System.out.println("Enter an amount to deposit: ");
                     System.out.println(".............");
-                    double amount = sc.nextDouble();
+                    long amount = sc.nextLong();
                     deposit(amount);
                     System.out.println("");
                     menuOptions();
@@ -66,8 +66,8 @@ public class Account implements DBConnection {
                     System.out.println(".............");
                     System.out.println("Enter an amount to withdraw: ");
                     System.out.println(".............");
-                    double withdraw_amount = sc.nextDouble();
-                    withdraw(withdraw_amount);
+                    long withdrawAmount = sc.nextLong();
+                    withdraw(withdrawAmount);
                     System.out.println("");
                     menuOptions();
                     break;
@@ -90,7 +90,7 @@ public class Account implements DBConnection {
         System.out.println("Thank you for using our banking services");
     }
 
-    void deposit(double amount) {
+    void deposit(long amount) {
         if(amount != 0) {
             bal += amount;
             prevTrans = amount;
@@ -100,7 +100,7 @@ public class Account implements DBConnection {
     }
 
 
-    void withdraw(double amount) {
+    void withdraw(long amount) {
         if(amount!=0 && bal>amount) {
             bal-=amount;
             prevTrans = amount;
