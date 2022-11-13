@@ -12,12 +12,13 @@ public class Account {
     long customerPhone;
     String customerAddress;
     Scanner sc = new Scanner(System.in);
-    Account(String name, long accountNumber) {
+    
+    Account(String name, long accountNumber) {  // constructor for login
         this.customerName = name;
         this.customerAcc = accountNumber;
     }
 
-    Account(String firstName, String lastName, long phone, String address, long account) {
+    Account(String firstName, String lastName, long phone, String address, long account) {   // constructor for registration
         this.customerName = firstName + " " + lastName;
         this.customerAcc = account;
         this.customerPhone = phone;
